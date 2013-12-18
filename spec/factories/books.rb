@@ -2,8 +2,9 @@
 
 FactoryGirl.define do
   factory :book do
+        author
     sequence(:title) { |n| "John Smith's #{n} Book" }
 
-    author
+
   end
 end
