@@ -3,5 +3,8 @@
 FactoryGirl.define do
   factory :checkout do
     sequence(:checked_out) {|n| n.days.ago}
+
+    reader
+    book
   end
 end
