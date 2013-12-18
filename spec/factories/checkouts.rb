@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :checkout do
-    book_id ""
+    sequence(:checked_out) {|n| n.days.ago}
   end
 end
