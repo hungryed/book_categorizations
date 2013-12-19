@@ -8,11 +8,7 @@ module Seeders
           category = Category.find_or_create_by(name: book_info[:category])
           title = book_info[:title]
           book = Book.find_or_create_by(title: title)
-          book.update_attributes(
-            author_id: Author.find(author),
-            category_id: Category.find(category)
-          )
-          book.save
+          book.update_attributes(author_id: Author.find(author).id)
         end
 
       end

@@ -40,6 +40,7 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'shoulda'
   gem 'pry-rails'
+  gem 'rails-erd'
 end
 
 # Use ActiveModel has_secure_password

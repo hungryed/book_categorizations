@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe Categorizations do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should validate_presence_of :book }
+  it { should validate_presence_of :category }
+
+  let(:book) { FactoryGirl.create(:book) }
+  let(:category) { FactoryGirl.create(:category) }
+
+  it { should validate_uniqueness_of(book).scoped_to(category) }
 end
