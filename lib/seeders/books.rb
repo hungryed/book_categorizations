@@ -2,27 +2,58 @@ module Seeders
   module Books
     class << self
       def seed
-        library_books.each do |author, books|
-          author = Author.author_info(author)
-          Author.find_or_create_by(author)
-          all_books = [books]
-          all_books.flatten.each do |book|
-            Book.find_or_create_by(title: book)
-          end
+        library_books.each do |book_info|
+          author = Author.author_info(book_info[:author])
+          author = Author.find_or_create_by(author)
+          category = Category.find_or_create_by(name: book_info[:category])
+          title = book_info[:title]
+          book = Book.find_or_create_by(title: title)
+          book.update_attributes(
+            author_id: Author.find(author),
+            category_id: Category.find(category)
+          )
+          book.save
         end
 
       end
 
       def library_books
-        {
-          "Joseph Conrad" => "Heart of Darkness",
-          "Virginia Woolf" => "Mrs Dalloway",
-          "Kurt Vonnegut" => "Slaughterhouse-Five",
-          "Ernest Hemingway" => ["The Sun Also Rises",
-                                "For Whom the Bell Tolls"],
-          "J.R.R. Tolkien" => "The Hobbit",
-          "J.R.R. Tolkien" => "The Lord of the Rings"
-        }
+        [
+          {author: "Joseph Conrad",
+           title: "Heart of Darkness",
+           category: "horror"
+           },
+           {
+          author: "Virginia Woolf",
+          title: "Mrs Dalloway",
+          category: "non-fiction"
+          },
+          {
+          author: "Kurt Vonnegut",
+          title: "Slaughterhouse-Five",
+          category: "horror"
+          },
+          {
+          author: "Ernest Hemingway",
+          title: "The Sun Also Rises",
+          category: "fiction"
+          },
+          {
+          author: "Ernest Hemingway",
+          title: "For Whom the Bell Tolls",
+          category: "fantasy"
+          },
+          {
+          author: "J.R.R. Tolkien",
+          title: "The Hobbit",
+          category: "adventure"
+          },
+          {
+          author: "J.R.R. Tolkien",
+          title: "The Lord of the Rings",
+          category: "adventuer"
+          },
+        ]
       end
     end
   end

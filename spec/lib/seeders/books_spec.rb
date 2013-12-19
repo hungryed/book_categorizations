@@ -4,13 +4,13 @@ describe Seeders::Books do
   let(:seeder) { Seeders::Books }
 
   it "seeds the books" do
-    random_book = Seeders::Books.library_books.first[1]
+    random_book = Seeders::Books.library_books.first[:title]
     seeder.seed
     expect(Book.where(title: random_book)).to be_present
   end
 
   it "seeds the books authors" do
-    author = Seeders::Books.library_books.first[0]
+    author = Seeders::Books.library_books.first[:author]
     seeder.seed
     author = Author.author_info(author)
     expect(Author.where(author)).to be_present
